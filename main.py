@@ -59,7 +59,6 @@ while True:
 			text = item["text"]	
 			text = text.encode("utf-8")
 			last_id_replied = max(item["id"], last_id_replied)
-			save_last_id_replied(last_id_replied)
 			mentions_lst = ["@"+el["screen_name"] for el in item["entities"]["user_mentions"] if el["screen_name"] != "glaucobot"]
 			sender = item["user"]["screen_name"]
 			mentions_lst.append("@"+sender)
@@ -70,6 +69,7 @@ while True:
 				print "-", glauco_reply
 				print ""
 				response = api.request('statuses/update', {'status': glauco_reply})
+				save_last_id_replied(last_id_replied)
 
 	if time.time() - t_request < 65:
 		time.sleep(65)
