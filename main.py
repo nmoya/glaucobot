@@ -63,7 +63,7 @@ while True:
 			mentions_lst = ["@"+el["screen_name"] for el in item["entities"]["user_mentions"] if el["screen_name"] != "glaucobot"]
 			sender = item["user"]["screen_name"]
 			mentions_lst.append("@"+sender)
-			glauco_reply = g.reply(text)
+			glauco_reply = b.query(text)
 			glauco_reply = " ".join(mentions_lst) + " " + glauco_reply
 			if sender != "glaucobot":
 				print "-", text
