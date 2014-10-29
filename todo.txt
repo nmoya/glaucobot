@@ -1,0 +1,5 @@
+- Implement Command pattner to parse the commands on Glauco brain.
+- time command
+- Improve weather command
+- Meaning of life command.
+- Joke command.
