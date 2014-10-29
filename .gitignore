@@ -2,6 +2,7 @@ api_token.py
 keys.py
 .DS_Store
 venv
+glaucobot/urls.py
 
 
 # Created by https://www.gitignore.io

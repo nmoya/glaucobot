@@ -2,10 +2,9 @@ from TwitterAPI import TwitterAPI
 import keys
 import time
 import json
-from glaucobot import glauco
+from glaucobot import brain
+from glaucobot import date
 
-
-TRACK_TERM = '@glaucobot'
 
 last_id_replied = 527224623864500225
 
@@ -36,32 +35,41 @@ def save_item(item):
 # r = api.request('search/tweets', {'q': 'glaucobot'})
 
 
-g = glauco.Glauco()
+b = brain.Brain()
 last_id_replied = load_last_id_replied()
+print b.query("WeAThEr  curitiba")
+print b.query("What's the meaning of Life?")
+print b.query("time")
+print b.query("Thanks!")
+print b.query("HI!!")
+print b.query("How are you?")
+print b.query("I'm fine")
+print b.query("currency BRL to USD")
 
-while True:
-	t_request = time.time()
-	print "Request at:", glauco.hms()
-	r = api.request('statuses/mentions_timeline', {'count': 350, 'since_id': last_id_replied})
-	for item in r:
-		if item.get("code") is not None:
-			if item["code"] == 88:
-				print "Rate limit exceeded"
-		if item.get("text") is not None:
-			text = item["text"]	
-			text = text.encode("utf-8")
-			last_id_replied = max(item["id"], last_id_replied)
-			save_last_id_replied(last_id_replied)
-			mentions_lst = ["@"+el["screen_name"] for el in item["entities"]["user_mentions"] if el["screen_name"] != "glaucobot"]
-			sender = item["user"]["screen_name"]
-			mentions_lst.append("@"+sender)
-			glauco_reply = g.reply(text)
-			glauco_reply = glauco_reply + " " + " ".join(mentions_lst)
-			if sender != "glaucobot":
-				print "-", text
-				print "-", glauco_reply
-				print ""
-				response = api.request('statuses/update', {'status': glauco_reply})
 
-	if time.time() - t_request < 65:
-		time.sleep(65)
+# while True:
+# 	t_request = time.time()
+# 	print "Request at:", date.hms()
+# 	# r = api.request('statuses/mentions_timeline', {'count': 350, 'since_id': last_id_replied})
+# 	for item in r:
+# 		if item.get("code") is not None:
+# 			if item["code"] == 88:
+# 				print "Rate limit exceeded"
+# 		if item.get("text") is not None:
+# 			text = item["text"]	
+# 			text = text.encode("utf-8")
+# 			last_id_replied = max(item["id"], last_id_replied)
+# 			save_last_id_replied(last_id_replied)
+# 			mentions_lst = ["@"+el["screen_name"] for el in item["entities"]["user_mentions"] if el["screen_name"] != "glaucobot"]
+# 			sender = item["user"]["screen_name"]
+# 			mentions_lst.append("@"+sender)
+# 			glauco_reply = g.reply(text)
+# 			glauco_reply = " ".join(mentions_lst) + " " + glauco_reply
+# 			if sender != "glaucobot":
+# 				print "-", text
+# 				print "-", glauco_reply
+# 				print ""
+# 				# response = api.request('statuses/update', {'status': glauco_reply})
+
+# 	if time.time() - t_request < 65:
+# 		time.sleep(65)
